@@ -1,0 +1,16 @@
+version: "3.7"
+
+services:
+
+  server:
+    build:
+      context: ./server
+      target: dev
+      args:
+        - XDEBUG_ACTIVE=${XDEBUG_ACTIVE}
+    volumes:
+      - ./server/src:/app/src:delegated
+      - nasty_server_vendor:/app/src/vendor
+
+volumes:
+  nasty_server_vendor:
