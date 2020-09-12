@@ -2,7 +2,7 @@
 set -e
 
 cd /app/src
-echp "[Waiting] Installing vendors."
+echo "[Waiting] Installing vendors."
 composer install
 
 while ! mysqladmin ping --host=${MYSQL_HOST} --user=${MYSQL_USERNAME} --password=${MYSQL_PASSWORD} --silent; do
