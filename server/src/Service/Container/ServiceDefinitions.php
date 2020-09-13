@@ -38,6 +38,30 @@ final class ServiceDefinitions
 				],
 				true
 			),
+			new Service(
+				\NastyDash\Service\Customer\Reader::class,
+				\NastyDash\Service\Customer\Reader\Mysql::class
+			),
+			new Service(
+				\NastyDash\Service\Customer\Saver::class,
+				\NastyDash\Service\Customer\Saver\Mysql::class
+			),
+			new Service(
+				\NastyDash\Service\Order\Reader::class,
+				\NastyDash\Service\Order\Reader\Mysql::class
+			),
+			new Service(
+				\NastyDash\Service\Order\Saver::class,
+				\NastyDash\Service\Order\Saver\Mysql::class
+			),
+			new Service(
+				\NastyDash\Service\Item\Reader::class,
+				\NastyDash\Service\Item\Reader\Mysql::class
+			),
+			new Service(
+				\NastyDash\Service\Item\Saver::class,
+				\NastyDash\Service\Item\Saver\Mysql::class
+			)
 		];
 	}
 
