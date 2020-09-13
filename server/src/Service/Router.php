@@ -6,6 +6,8 @@ namespace NastyDash\Service;
 use FastRoute\Dispatcher;
 use FastRoute\RouteCollector;
 use NastyDash\Service\Controller\Orders;
+use NastyDash\Service\Controller\Seed;
+
 use function FastRoute\cachedDispatcher;
 
 class Router
@@ -29,7 +31,7 @@ class Router
 
 	public function routes(RouteCollector $r): void
 	{
-		$r->get('/api/orders', Orders::class);
+		$r->get('/api/seed', Seed::class);
 	}
 
     public function getDispatcher(): Dispatcher
