@@ -3,14 +3,16 @@ declare(strict_types=1);
 
 namespace NastyDash\Service;
 
-use Middlewares\ErrorFormatter\JsonFormatter;
 use Middlewares\ErrorHandler;
 use Middlewares\FastRoute;
 use Middlewares\GzipEncoder;
 use Middlewares\RequestHandler;
 use Middlewares\Utils\Dispatcher;
 use NastyDash\Service\Config\Environment;
+use NastyDash\Service\Container\ContainerFactory;
+use NastyDash\Service\Container\ServiceDefinitions;
 use NastyDash\Service\Middleware\Emitter;
+use NastyDash\Service\Middleware\JsonErrorFormatter;
 use NastyDash\Service\Middleware\JsonFormatter as JsonFormatterMiddleware;
 use Nyholm\Psr7\Factory\Psr17Factory;
 use Nyholm\Psr7Server\ServerRequestCreator;
@@ -18,7 +20,7 @@ use Psr\Container\ContainerInterface;
 
 class Kernel
 {
-	/** @var string  */
+
 	const CACHE_DIR = '/tmp/nasty-dash/cache/';
 
     private string $rootDir;
