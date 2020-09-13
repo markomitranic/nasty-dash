@@ -3,8 +3,10 @@ declare(strict_types=1);
 
 namespace NastyDash\Service\Container;
 
+use Monolog\Logger;
 use NastyDash\Service\Config\Environment;
 use NastyDash\Service\Database\ConnectionParams;
+use NastyDash\Service\LoggerFactory;
 
 final class ServiceDefinitions
 {
@@ -22,7 +24,11 @@ final class ServiceDefinitions
 			new Service(
 				\Psr\Log\LoggerInterface::class,
 				\NastyDash\Service\LoggerFactory::class,
-				['name' => 'api'],
+				[
+					'name' => 'api',
+					'output' => LoggerFactory::OUTPUT_STDOUT,
+					'level' => Logger::WARNING
+				],
 				true
 			),
 			new Service(
