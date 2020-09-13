@@ -9,6 +9,7 @@ use Middlewares\FastRoute;
 use Middlewares\GzipEncoder;
 use Middlewares\RequestHandler;
 use Middlewares\Utils\Dispatcher;
+use NastyDash\Service\Config\Environment;
 use NastyDash\Service\Middleware\Emitter;
 use NastyDash\Service\Middleware\JsonFormatter as JsonFormatterMiddleware;
 use Nyholm\Psr7\Factory\Psr17Factory;
@@ -21,6 +22,7 @@ class Kernel
 	const CACHE_DIR = '/tmp/nasty-dash/cache/';
 
     private string $rootDir;
+	private Environment $env;
 	private ContainerInterface $container;
 	private ServerRequestCreator $requestCreator;
 	private Router $router;
@@ -29,6 +31,7 @@ class Kernel
     {
         $this->rootDir = dirname(__DIR__);
         $this->container = ContainerFactory::create();
+        $this->env = new Environment($this->rootDir);
 		$psr17Factory = new Psr17Factory();
         $this->requestCreator = new ServerRequestCreator(
 			$psr17Factory, // ServerRequestFactory
