@@ -43,7 +43,11 @@ class Kernel
 			$psr17Factory, // UploadedFileFactory
 			$psr17Factory  // StreamFactory
 		);
-        $this->router = new Router((bool) !$this->env->get('IN_DEV'), self::CACHE_DIR);
+        $this->router = new Router(
+        	(bool) !$this->env->get('IN_DEV'),
+			self::CACHE_DIR,
+			(bool) $this->env->get('IN_DEV'),
+		);
     }
 
     public function handle(): void
