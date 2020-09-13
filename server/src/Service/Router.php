@@ -6,7 +6,7 @@ namespace NastyDash\Service;
 use FastRoute\Dispatcher;
 use FastRoute\RouteCollector;
 use NastyDash\Service\Controller\Seed;
-use NastyDash\Service\Controller\Total;
+use NastyDash\Service\Controller\Stats\Total;
 
 use function FastRoute\cachedDispatcher;
 
@@ -24,14 +24,14 @@ class Router
 		string $cacheDir = __DIR__,
 		bool $devEnv = false
 	) {
-        $this->router = cachedDispatcher(
+		$this->devEnv = $devEnv;
+		$this->router = cachedDispatcher(
             [$this, 'routes'],
             [
             	'cacheDisabled' => !$cached,
 				'cacheFile' => sprintf('%s/%s', realpath($cacheDir), self::CACHE_NAME)
 			]
         );
-        $this->devEnv = $devEnv;
     }
 
 	public function routes(RouteCollector $r): void
