@@ -55,7 +55,7 @@ class Kernel
 		$request = $this->requestCreator->fromGlobals();
 		$dispatcher = new Dispatcher([
 			new Emitter(),
-			new ErrorHandler([new JsonFormatter()]),
+			new ErrorHandler([new JsonErrorFormatter()]),
 			new JsonFormatterMiddleware(),
 			new GzipEncoder(),
 			new FastRoute($this->router->getDispatcher()),
