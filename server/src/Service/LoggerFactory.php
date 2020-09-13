@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace NastyDash\Service;
@@ -11,13 +10,15 @@ use Psr\Log\LoggerInterface;
 class LoggerFactory
 {
 
-	public static function create(): LoggerInterface
-	{
-		$logger = new Logger('api');
-		$logger->pushHandler(new StreamHandler(
-			'php://stdout',
-			Logger::WARNING
-		));
+	const OUTPUT_STDOUT = 'php://stdout';
+
+	public function __invoke(
+		string $name,
+		string $output = self::OUTPUT_STDOUT,
+		int $level = Logger::WARNING
+	): LoggerInterface {
+		$logger = new Logger($name);
+		$logger->pushHandler(new StreamHandler($output, $level));
 		return $logger;
 	}
 

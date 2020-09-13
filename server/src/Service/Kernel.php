@@ -30,8 +30,10 @@ class Kernel
 	public function __construct()
     {
         $this->rootDir = dirname(__DIR__);
-        $this->container = ContainerFactory::create();
         $this->env = new Environment($this->rootDir);
+        $this->container = ContainerFactory::create(
+        	new ServiceDefinitions($this->env)
+		);
 		$psr17Factory = new Psr17Factory();
         $this->requestCreator = new ServerRequestCreator(
 			$psr17Factory, // ServerRequestFactory
@@ -39,7 +41,7 @@ class Kernel
 			$psr17Factory, // UploadedFileFactory
 			$psr17Factory  // StreamFactory
 		);
-        $this->router = new Router(true, self::CACHE_DIR);
+        $this->router = new Router((bool) !$this->env->get('IN_DEV'), self::CACHE_DIR);
     }
 
     public function handle(): void
