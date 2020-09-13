@@ -25,6 +25,19 @@ final class ServiceDefinitions
 				['name' => 'api'],
 				true
 			),
+			new Service(
+				\NastyDash\Service\Database\PDO::class,
+				\NastyDash\Service\Database\ConnectionFactory::class,
+				[
+					'connectionParams' => new ConnectionParams(
+						$this->env->get('MYSQL_HOST'),
+						$this->env->get('MYSQL_DATABASE'),
+						$this->env->get('MYSQL_USER'),
+						$this->env->get('MYSQL_PASSWORD'),
+					)
+				],
+				true
+			),
 		];
 	}
 
