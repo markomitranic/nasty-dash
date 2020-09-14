@@ -20,13 +20,13 @@ class TotalListRequestValidator
 	public function transform(ServerRequestInterface $request): TotalListRequestParamsDTO
 	{
 		if (array_key_exists('dateFrom', $request->getQueryParams())) {
-			$dateFrom = new DateTimeImmutable($request->getQueryParams()['dateFrom']);
+			$dateFrom = DateTimeImmutable::createFromFormat('U', $request->getQueryParams()['dateFrom']);
 		} else {
 			$dateFrom = new DateTimeImmutable('-30 days');
 		}
 
 		if (array_key_exists('dateTo', $request->getQueryParams())) {
-			$dateTo = new DateTimeImmutable($request->getQueryParams()['dateTo']);
+			$dateTo = DateTimeImmutable::createFromFormat('U', $request->getQueryParams()['dateTo']);
 		} else {
 			$dateTo = new DateTimeImmutable('now');
 		}

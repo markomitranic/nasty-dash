@@ -9,7 +9,7 @@ use DatePeriod;
 abstract class Aggregate
 {
 
-	const PERIOD = 'P1D';
+	protected string $period = 'P1D';
 
 	public function resolveAggregatePoints(\DateTimeInterface $from, \DateTimeInterface $to): DatePeriod
 	{
@@ -18,11 +18,11 @@ abstract class Aggregate
 
 	public function getInterval(): DateInterval
 	{
-		return new DateInterval($this::getAggregatePeriod());
+		return new DateInterval($this->period);
 	}
 
 	protected function getAggregatePeriod(): string
 	{
-		return self::PERIOD;
+		return $this->period;
 	}
 }

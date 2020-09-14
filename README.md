@@ -24,3 +24,13 @@ Make a sales dashboard as a very simple and straightfoward PHP application to sh
 - Total number of customers
 - Statistics by defaut should be based on last month, with an option to change to any time period (to & from).
 - Create 1 month timeframe chart with customers and orders (something like this - (high charts can be used)):
+
+## API Specification
+
+```
+[GET] /api/stats/total
+
+aggregate = hour|day|month|year (day)
+dateFrom = timestamp (-30 days)
+dateTo = timestamp (now)
+```

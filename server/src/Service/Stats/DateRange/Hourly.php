@@ -9,6 +9,6 @@ namespace NastyDash\Service\Stats\DateRange;
 class Hourly extends Aggregate
 {
 
-	public const PERIOD = 'P1H';
+	protected string $period = 'PT1H';
 
 }

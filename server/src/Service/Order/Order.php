@@ -4,14 +4,15 @@ declare(strict_types=1);
 
 namespace NastyDash\Service\Order;
 
-use DateTime;
+use DateTimeImmutable;
+use DateTimeInterface;
 
 class Order
 {
 
 	private int $id;
 
-	private DateTime $purchaseDate;
+	private DateTimeInterface $purchaseDate;
 
 	private string $country;
 
@@ -24,12 +25,12 @@ class Order
 		return $this->id;
 	}
 
-	public function getPurchaseDate(): DateTime
+	public function getPurchaseDate(): DateTimeInterface
 	{
 		return $this->purchaseDate;
 	}
 
-	public function setPurchaseDate(DateTime $purchaseDate): self
+	public function setPurchaseDate(DateTimeInterface $purchaseDate): self
 	{
 		$this->purchaseDate = $purchaseDate;
 		return $this;
@@ -66,5 +67,17 @@ class Order
 	{
 		$this->customerId = $customerId;
 		return $this;
+	}
+
+	public function __set($key, $value): void
+	{
+		switch ($key) {
+			case 'purchase_date':
+				$this->setPurchaseDate(new DateTimeImmutable($value));
+				break;
+			case 'customer_id':
+				$this->setCustomerId((int) $value);
+				break;
+		}
 	}
 }

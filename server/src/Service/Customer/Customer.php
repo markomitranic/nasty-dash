@@ -3,6 +3,9 @@ declare(strict_types=1);
 
 namespace NastyDash\Service\Customer;
 
+use DateTimeImmutable;
+use DateTimeInterface;
+
 class Customer
 {
 
@@ -13,6 +16,8 @@ class Customer
 	private string $lastName;
 
 	private string $email;
+
+	private DateTimeInterface $createdAt;
 
 	public function getId(): int
 	{
@@ -50,6 +55,20 @@ class Customer
 	{
 		$this->email = $email;
 		return $this;
+	}
+
+	public function getCreatedAt(): DateTimeInterface
+	{
+		return $this->createdAt;
+	}
+
+	public function __set($key, $value): void
+	{
+		switch ($key) {
+			case 'created_at':
+				$this->createdAt = new DateTimeImmutable($value);
+				break;
+		}
 	}
 
 }

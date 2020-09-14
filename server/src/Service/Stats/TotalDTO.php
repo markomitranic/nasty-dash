@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace NastyDash\Service\Stats;
 
+use DateTime;
 use DateTimeInterface;
 use JsonSerializable;
 
@@ -49,7 +50,7 @@ class TotalDTO implements JsonSerializable
 	public function jsonSerialize()
 	{
 		return [
-			'dateTime' => $this->getDateTime()->getTimestamp(),
+			'dateTime' => $this->getDateTime()->format(DateTime::ISO8601),
 			'orders' => $this->getOrders(),
 			'revenue' => $this->getRevenue(),
 			'customers' => $this->getCustomers()

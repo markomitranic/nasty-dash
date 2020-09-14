@@ -6,6 +6,6 @@ namespace NastyDash\Service\Stats\DateRange;
 class Monthly extends Aggregate
 {
 
-	public const PERIOD = 'P1M';
+	protected string $period = 'P1M';
 
 }

@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace NastyDash\Service\Controller\Stats;
 
+use DateTime;
+use DateTimeImmutable;
 use NastyDash\Service\API\ResponseFactory;
 use NastyDash\Service\Controller\Controller;
 use NastyDash\Service\Stats\TotalAggregateService;

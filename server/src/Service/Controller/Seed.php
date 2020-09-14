@@ -12,8 +12,8 @@ use NastyDash\Service\Item\Saver as ItemSaver;
 use NastyDash\Service\Order\Order;
 use NastyDash\Service\Order\Saver as OrderSaver;
 use Nyholm\Psr7\Response;
-use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
 use Psr\Log\LoggerInterface;
 
 class Seed extends Controller
@@ -37,8 +37,10 @@ class Seed extends Controller
 		parent::__construct($logger);
 	}
 
-	public function __invoke(RequestInterface $request): ResponseInterface
+	public function __invoke(ServerRequestInterface $request): ResponseInterface
 	{
+		$this->logRequest($request);
+
 		/** @var Customer[] $customers */
 		$customers = [];
 		for ($i=0; $i < 1000; $i++) {
@@ -74,7 +76,7 @@ class Seed extends Controller
 					->setQuantity($this->faker->numberBetween(1, 12))
 					->setEan($this->faker->ean8);
 
-				$orders[] = $this->itemSaver->insert($item);
+				$items[] = $this->itemSaver->insert($item);
 			}
 		}
 
@@ -84,7 +86,7 @@ class Seed extends Controller
 			'items' => count($items)
 		];
 
-		return new Response(200, [], json_encode($output, JSON_THROW_ON_ERROR));
+		return new Response(200, [], json_encode(['data' => $output], JSON_THROW_ON_ERROR));
 	}
 
 }

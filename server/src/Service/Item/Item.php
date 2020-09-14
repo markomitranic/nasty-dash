@@ -65,4 +65,13 @@ class Item
 		return $this;
 	}
 
+	public function __set($key, $value): void
+	{
+		switch ($key) {
+			case 'order_id':
+				$this->setOrderId((int) $value);
+				break;
+		}
+	}
+
 }
