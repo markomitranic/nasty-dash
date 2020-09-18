@@ -7,7 +7,6 @@ COPY ./entrypoint.sh /app/entrypoint.sh
 
 FROM base AS prod
 COPY ./src /app/src
-#COPY --from=ag_forum_node /app/ag-forums-app/js /app/src/forum/applications/askgamblers/dev/js
 
 FROM base AS dev
 ARG BLACKFIRE_AGENT_IP=blackfire_agent
