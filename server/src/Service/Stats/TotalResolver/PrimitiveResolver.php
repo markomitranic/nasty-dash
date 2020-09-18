@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace NastyDash\Service\Stats\TotalResolver;
 
+use DateTime;
 use DateTimeInterface;
 use NastyDash\Service\Customer\Reader as CustomerReader;
 use NastyDash\Service\Item\Reader as ItemReader;
@@ -45,13 +46,13 @@ class PrimitiveResolver implements TotalResolver
 
 		/** @var DateTimeInterface $date */
 		foreach ($aggregatePeriod as $date) {
-			$periodEnd = date_add(new \DateTime($date->format('c')), $aggregatePeriod->getDateInterval());
+			$periodEnd = $date->add($aggregatePeriod->getDateInterval());
 
 			$orders = $this->orderReader->findAllInDateRange($date, $periodEnd);
 			$revenue = $this->calculateRevenue(...$orders);
 			$customers = $this->getNewCustomers(...$orders);
 
-			$results[] = new TotalDTO($date, count($orders), $revenue, $customers);
+			$results[] = new TotalDTO($date, $periodEnd, count($orders), $revenue, $customers);
 		}
 
 
