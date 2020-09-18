@@ -6,6 +6,6 @@ namespace NastyDash\Service\Stats\DateRange;
 class Yearly extends Aggregate
 {
 
-	protected string $period = 'P1M';
+	protected string $period = 'P1Y';
 
 }
