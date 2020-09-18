@@ -14,6 +14,7 @@ function gracefulShutdown ()
 }
 trap "gracefulShutdown" 2
 
+docker build ./client -t nasty_client --target prod
 docker-compose -f docker-compose.yml -f docker-compose-dev.yml down --remove-orphans
 docker-compose -f docker-compose.yml -f docker-compose-dev.yml build
 docker-compose -f docker-compose.yml -f docker-compose-dev.yml up --remove-orphans

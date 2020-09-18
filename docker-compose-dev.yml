@@ -2,6 +2,11 @@ version: "3.7"
 
 services:
 
+  gateway:
+    volumes:
+      - ./client/src/public:/app/src/public:delegated
+      - client_build:/app/src/public/build
+
   server:
     build:
       context: ./server
@@ -12,5 +17,19 @@ services:
       - ./server/src:/app/src:delegated
       - nasty_server_vendor:/app/src/vendor
 
+  client:
+    container_name: nasty_client
+    build:
+      context: ./client
+      target: dev
+    volumes:
+      - ./client/src:/app/src:delegated
+      - client_build:/app/src/build
+      - client_vendors:/app/src/node_modules
+    networks:
+      - nasty-dash
+
 volumes:
   nasty_server_vendor:
+  client_vendors:
+  client_build:
