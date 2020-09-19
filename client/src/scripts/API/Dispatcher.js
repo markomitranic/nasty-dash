@@ -18,7 +18,7 @@ class Dispatcher {
 		}
 
 		this.observers.forEach((observer) => {
-			observer(data.data);
+			observer(data);
 		});
 	}
 

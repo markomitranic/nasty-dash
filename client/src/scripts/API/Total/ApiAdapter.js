@@ -2,6 +2,8 @@
 
 import axios from 'axios';
 import Dispatcher from "../Dispatcher";
+import Total from "./Total";
+import moment from "moment";
 
 class ApiAdapter extends Dispatcher {
 
@@ -25,10 +27,23 @@ class ApiAdapter extends Dispatcher {
 				this.update(null, response.data);
 			}
 
-			this.update(response.data, null);
-		}).catch((err) => {
-			this.update(null, err);
+			this.update(this.transformData(response.data), null);
 		});
+	}
+
+	transformData(rawData) {
+		const transformedData = [];
+
+		rawData.data.forEach((total) => {
+			transformedData.push(new Total(
+				moment(total.dateFrom),
+				moment(total.dateTo),
+				total.orders,
+				total.revenue,
+				total.customers
+			));
+		});
+		return transformedData;
 	}
 }
 
