@@ -2,7 +2,7 @@ import 'bootstrap';
 import NotificationPopup from "./NotificationPopup";
 import TotalDashboard from "./Dashboard/TotalDashboard";
 import AggregateFormDispatcher from "./Aggregate/FormDispatcher";
-import TotalApiAdapter from "./Entity/Total/ApiAdapter";
+import TotalApiAdapter from "./API/Total/ApiAdapter";
 
 const notificationPopup = new NotificationPopup();
 
