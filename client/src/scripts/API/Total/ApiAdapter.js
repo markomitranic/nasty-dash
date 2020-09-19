@@ -7,12 +7,14 @@ import moment from "moment";
 
 class ApiAdapter extends Dispatcher {
 
-	constructor(notificationPopup) {
+	constructor(notificationPopup, spinner) {
 		super(notificationPopup);
+		this.spinner = spinner;
 		this.uri = '/api/stats/total';
 	}
 
 	fetch(interval, dateFrom, dateTo) {
+		this.spinner.on();
 		axios.get(
 			this.uri,
 			{
@@ -23,6 +25,7 @@ class ApiAdapter extends Dispatcher {
 				}
 			}
 		).then((response) => {
+			this.spinner.off();
 			if (response.status !== 200) {
 				this.update(null, response.data);
 			}
