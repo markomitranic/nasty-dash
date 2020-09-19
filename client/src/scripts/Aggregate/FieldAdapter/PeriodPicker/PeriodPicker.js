@@ -1,8 +1,9 @@
 "use strict";
+
 import moment from "moment";
 import $ from "jquery";
 import 'daterangepicker';
-import DateSelectionDTO from "./DateSelectionDTO";
+import Interval from "./Interval";
 
 class PeriodPicker {
 
@@ -35,7 +36,7 @@ class PeriodPicker {
 	}
 
 	setData(startDate, endDate) {
-		this.data = new DateSelectionDTO(startDate, endDate);
+		this.data = new Interval(startDate, endDate);
 	}
 
 	getData() {

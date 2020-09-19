@@ -1,6 +1,6 @@
 "use strict";
 
-class ErrorPopup {
+class NotificationPopup {
 
 	constructor() {
 		this.wrapper = document.getElementById('error-popup-wrapper');
@@ -23,4 +23,4 @@ class ErrorPopup {
 
 }
 
-export default ErrorPopup;
+export default NotificationPopup;
