@@ -18,11 +18,12 @@ class PeriodPicker {
 			opens: 'right',
 			startDate: this.getData().startDate,
 			endDate: this.getData().endDate,
-			maxDate: moment(),
 			minDate: moment.unix(0),
+			maxDate: moment(),
 			timePicker: true,
 			alwaysShowCalendars: true,
 			ranges: {
+				'All time': [moment.unix(0), moment()],
 				'Today': [moment(), moment()],
 				'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
 				'Last 7 Days': [moment().subtract(6, 'days'), moment()],

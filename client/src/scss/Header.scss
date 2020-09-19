@@ -13,10 +13,10 @@ header#header-wrapper {
 
   h1 {
 	margin: 0 15px 0 0;
-	background: #057bfe;
+	background: #a0cfff;
 	border-radius: 4px;
-	color: white;
-	padding: 5px 10px;
+	color: #ffffff;
+	padding: 7px 14px;
   }
   form {
 	flex: 1;
@@ -31,6 +31,20 @@ header#header-wrapper {
 		justify-content: flex-end;
 		margin: 5px 10px;
 
+		&.interval {
+		  #aggregate-interval {
+			height: 40px;
+		  }
+		}
+
+		&.date-picker {
+		  #aggregate-date-picker {
+			height: 40px;
+			font-size: 16px;
+			width: 200px;
+		  }
+		}
+
 		&.submit {
 		  justify-content: space-around;
 
@@ -42,8 +56,13 @@ header#header-wrapper {
 		label {
 		  margin: 0 10px 0 0;
 		  padding: 0;
+		  color: lighten(black, 30%);
 		}
 	  }
 	}
   }
+}
+
+#data-seed-alert {
+  margin: 0 20px;
 }

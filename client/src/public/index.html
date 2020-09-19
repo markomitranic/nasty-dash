@@ -30,7 +30,7 @@
 						<input type="text" name="dates" id="aggregate-date-picker">
 					</div>
 					<div class="submit">
-						<button type="submit" class="btn btn-outline-primary">Query</button>
+						<button type="submit" class="btn btn-success">Search</button>
 						<div id="ajax-loader" class="spinner-border spinner-border-sm" role="status">
 							<span class="sr-only">Loading...</span>
 						</div>
@@ -42,20 +42,20 @@
 
 	<div class="row">
 		<div class="col-12">
-			<div class="alert alert-primary alert-server" role="alert">
+			<div id="data-seed-alert" class="alert alert-primary alert-server" role="alert">
 				<button type="button" class="close" data-dismiss="alert">×</button>
 				<strong>Experiencing a lack of data?</strong> That's not right, feel free to <a href="/api/seed" target="_blank">seed additional random data to the DB</a>. (now - 2 years limit)
 			</div>
 		</div>
 	</div>
 
-	<div class="row">
+	<div class="row widget-row">
 		<div class="col-4"><div id="total-revenue-widget" class="widget single-datapoint-widget"></div></div>
 		<div class="col-4"><div id="total-customers-widget" class="widget single-datapoint-widget"></div></div>
 		<div class="col-4"><div id="total-orders-widget" class="widget single-datapoint-widget"></div></div>
 	</div>
 
-	<div class="row"><div class="col-12"><div id="total-timeframe-widget" class="widget timeframe-widget"></div></div></div>
+	<div class="row widget-row"><div class="col-12"><div id="total-timeframe-widget" class="widget timeframe-widget"></div></div></div>
 
 	<div id="error-popup" class="row position-fixed fixed-bottom">
 		<div class="col-md-6 offset-md-3">
