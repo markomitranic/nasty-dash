@@ -5,9 +5,9 @@ import PeriodPicker from "./FieldAdapter/PeriodPicker/PeriodPicker";
 
 class FormDispatcher {
 
-	constructor(form, totalApiAdapter) {
-		this.form = form;
-		this.apiAdapter = totalApiAdapter;
+	constructor(formWrapper) {
+		this.observers = [];
+		this.form = formWrapper;
 		this.form.addEventListener('submit', (e) => { this.submit(e);});
 
 		this.periodPicker = new PeriodPicker(this.form.querySelector('#aggregate-date-picker'));
@@ -17,11 +17,17 @@ class FormDispatcher {
 	submit(event = null) {
 		if (event !== null) { event.preventDefault(); }
 
-		this.apiAdapter.fetch(
-			this.intervalPicker.getData(),
-			this.periodPicker.getData().startDate,
-			this.periodPicker.getData().endDate
-		);
+		this.observers.forEach((observer) => {
+			observer.fetch(
+				this.intervalPicker.getData(),
+				this.periodPicker.getData().startDate,
+				this.periodPicker.getData().endDate
+			);
+		});
+	}
+
+	addObserver(observer) {
+		this.observers.push(observer);
 	}
 
 }
