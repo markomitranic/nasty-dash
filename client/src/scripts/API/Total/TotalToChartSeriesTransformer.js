@@ -7,8 +7,8 @@ class TotalToChartSeriesTransformer {
 		const ordersDatapoints = [];
 
 		for (let i=0; i < data.length; i++) {
-			customersDatapoints.push(data[i].customers);
-			ordersDatapoints.push(data[i].orders);
+			customersDatapoints.push([this.getDateFromMoment(data[i].dateFrom), data[i].customers]);
+			ordersDatapoints.push([this.getDateFromMoment(data[i].dateFrom), data[i].orders]);
 		}
 
 		return [
@@ -21,6 +21,10 @@ class TotalToChartSeriesTransformer {
 				data: ordersDatapoints
 			}
 		];
+	}
+
+	getDateFromMoment(moment) {
+		return moment.valueOf();
 	}
 
 }

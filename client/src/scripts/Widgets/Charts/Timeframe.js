@@ -12,52 +12,64 @@ class Timeframe {
 		this.createChart();
 	}
 
-
 	createChart() {
 		this.chart = Highcharts.chart(this.wrapper, {
-			title: {
-				text: 'Solar Employment Growth by Sector, 2010-2016'
+			chart: {
+				type: 'spline',
+				scrollablePlotArea: {
+					minWidth: 600,
+					scrollPositionX: 1
+				}
 			},
-			subtitle: {
-				text: 'Source: thesolarfoundation.com'
+			title: {
+				text: 'Orders and newly registered Customers',
+				align: 'left'
+			},
+			xAxis: {
+				type: 'datetime',
+				labels: {
+					overflow: 'justify'
+				},
+				title: {
+					text: 'Date'
+				}
 			},
 			yAxis: {
 				title: {
-					text: 'Number of Employees'
+					text: 'Number of events'
+				},
+				min: 0
+			},
+			tooltip: {
+				headerFormat: '<b>{series.name}</b><br>',
+				pointFormat: '{point.x:%e. %b}: {point.y:.2f}'
+			},
+			plotOptions: {
+				spline: {
+					lineWidth: 4,
+					states: {
+						hover: {
+							lineWidth: 5
+						}
+					},
+					marker: {
+						enabled: false
+					},
+					pointInterval: 3600000, // one hour
+					pointStart: Date.UTC(2018, 1, 13, 0, 0, 0)
 				}
 			},
-			xAxis: {
-				accessibility: {
-					rangeDescription: 'Range: 2010 to 2017'
+			series: [],
+			navigation: {
+				menuItemStyle: {
+					fontSize: '10px'
 				}
 			},
+
 			legend: {
 				layout: 'vertical',
 				align: 'right',
 				verticalAlign: 'middle'
-			},
-			plotOptions: {
-				series: {
-					label: {
-						connectorAllowed: false
-					},
-					pointStart: 2010
-				}
-			},
-			series: [],
-			responsive: {
-				rules: [{
-					condition: {
-						maxWidth: 500
-					},
-					chartOptions: {
-						legend: {
-							layout: 'horizontal',
-							align: 'center',
-							verticalAlign: 'bottom'
-						}
-					}
-				}]
 			}
 
 		});
