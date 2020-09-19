@@ -1,22 +1,45 @@
 "use strict";
+import moment from "moment";
+import $ from "jquery";
+import 'daterangepicker';
+import DateSelectionDTO from "./DateSelectionDTO";
 
 class PeriodPicker {
 
-	constructor(inputElement) {
-		this.element = inputElement;
-		this.allowedValues = ['hour', 'day', 'month', 'year'];
+	constructor(
+		element,
+		startDate = moment().subtract(29, 'days'),
+		endDate = moment()
+	) {
+		this.setData(startDate, endDate);
+
+		this.picker = $(element).daterangepicker({
+			opens: 'right',
+			startDate: this.getData().startDate,
+			endDate: this.getData().endDate,
+			maxDate: moment(),
+			minDate: moment.unix(0),
+			timePicker: true,
+			alwaysShowCalendars: true,
+			ranges: {
+				'Today': [moment(), moment()],
+				'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+				'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+				'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+				'This Month': [moment().startOf('month'), moment().endOf('month')],
+				'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+			}
+		}, (startDate, endDate, label) => {
+			this.setData(startDate, endDate);
+		});
+	}
+
+	setData(startDate, endDate) {
+		this.data = new DateSelectionDTO(startDate, endDate);
 	}
 
 	getData() {
-		return this.sanitizeValue(this.element.value);
-	}
-
-	sanitizeValue(value) {
-		if (this.allowedValues.indexOf(value)) {
-			return value;
-		}
-
-		throw new Error('test');
+		return this.data;
 	}
 
 }

@@ -1,7 +1,7 @@
 "use strict";
 
-import PeriodPicker from "./DatePicker";
-import IntervalPicker from "./PeriodPicker";
+import IntervalPicker from "./IntervalPicker";
+import PeriodPicker from "./PeriodPicker";
 
 class Form {
 
@@ -10,7 +10,7 @@ class Form {
 		this.submitCallback = submitCallback;
 		this.bootstrapDom();
 		this.periodPicker = new PeriodPicker(this.dateInput);
-		this.intervalPicker = new IntervalPicker(this.periodInput);
+		this.intervalPicker = new IntervalPicker(this.intervalInput);
 		this.form.addEventListener('submit', (event) => {
 			this.submit(event);
 		});
@@ -18,7 +18,7 @@ class Form {
 
 	bootstrapDom() {
 		this.dateInput = this.form.querySelector('#aggregate-date-picker');
-		this.periodInput = this.form.querySelector('#aggregate-interval');
+		this.intervalInput = this.form.querySelector('#aggregate-interval');
 	}
 
 	submit(event = null) {
