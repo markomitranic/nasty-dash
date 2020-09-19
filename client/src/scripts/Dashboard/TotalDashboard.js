@@ -1,6 +1,8 @@
 "use strict";
 
 import SingleDatapoint from "../Widgets/Charts/SingleDatapoint";
+import Timeframe from "../Widgets/Charts/Timeframe";
+import TotalToChartSeriesTransformer from "../API/Total/TotalToChartSeriesTransformer";
 
 class TotalDashboard {
 
@@ -19,6 +21,10 @@ class TotalDashboard {
 			document.getElementById('total-customers-widget'),
 			'Total Customers'
 		);
+		this.totalTimeframeWidget = new Timeframe(
+			document.getElementById('total-timeframe-widget'),
+			'Sales over time'
+		);
 	}
 
 	totalApiUpdate(totals) {
@@ -36,7 +42,9 @@ class TotalDashboard {
 		this.totalRevenueWidget.update(sum.revenue);
 		this.totalCustomersWidget.update(sum.customers);
 
-		console.log(totals);
+		this.totalTimeframeWidget.update(
+			new TotalToChartSeriesTransformer().transform(totals)
+		);
 	}
 
 }
