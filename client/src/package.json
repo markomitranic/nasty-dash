@@ -15,6 +15,7 @@
 		"@babel/core": "^7.1.5",
 		"@babel/preset-env": "^7.8.4",
 		"@fortawesome/fontawesome-free": "^5.12.1",
+		"axios": "^0.20.0",
 		"babel-loader": "^8.0.4",
 		"bootstrap": "^4.5.2",
 		"canvasjs": "^1.8.3",

@@ -12,9 +12,34 @@
 
 <div class="container">
 	<div class="row">
-		<div class="col-8">N.A.S.T.Y. Dash</div>
-		<div class="col-4">
-			<input type="text" name="dates" id="datePicker">
+		<div class="col-4">N.A.S.T.Y. Dash</div>
+		<div class="col-8">
+			<form action="/" id="aggregate-form">
+				<div class="row">
+					<div class="col-4">
+						<label for="aggregate-interval">Interval:</label>
+						<select id="aggregate-interval" class="custom-select">
+							<option value="hour">Hourly</option>
+							<option value="day" selected>Daily</option>
+							<option value="month">Monthly</option>
+							<option value="year">Yearly</option>
+						</select>
+					</div>
+					<div class="col-4">
+						<label for="aggregate-date-picker">Period:</label>
+						<input type="text" name="dates" id="aggregate-date-picker">
+					</div>
+					<div class="col-4">
+						<button type="submit" class="btn btn-outline-primary">Primary</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+
+	<div id="error-popup" class="row position-fixed fixed-bottom">
+		<div class="col-md-6 offset-md-3">
+			<ul id="error-popup-wrapper"></ul>
 		</div>
 	</div>
 </div>

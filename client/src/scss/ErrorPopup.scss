@@ -1,0 +1,16 @@
+#error-popup {
+  bottom: 20px;
+
+  #error-popup-wrapper {
+	margin: 0 auto;
+	list-style-type: none;
+	max-height: calc(90vh - 40px);
+	overflow-y: scroll;
+	padding: 5px;
+
+	li {
+
+	}
+  }
+
+}
