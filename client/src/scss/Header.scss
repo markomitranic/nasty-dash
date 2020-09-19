@@ -1,0 +1,49 @@
+header#header-wrapper {
+  background: white;
+  margin: 20px;
+  border: 1px solid #eaeaea;
+  padding: 10px;
+  box-shadow: 0 0 20px 0 #00000014;
+  border-radius: 4px;
+  overflow: hidden;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: space-between;
+
+  h1 {
+	margin: 0 15px 0 0;
+	background: #057bfe;
+	border-radius: 4px;
+	color: white;
+	padding: 5px 10px;
+  }
+  form {
+	flex: 1;
+
+	& > .row {
+	  align-items: center;
+	  justify-content: flex-end;
+
+	  & > div {
+		display: flex;
+		align-items: center;
+		justify-content: flex-end;
+		margin: 5px 10px;
+
+		&.submit {
+		  justify-content: space-around;
+
+		  #ajax-loader {
+			margin: 10px;
+		  }
+		}
+
+		label {
+		  margin: 0 10px 0 0;
+		  padding: 0;
+		}
+	  }
+	}
+  }
+}

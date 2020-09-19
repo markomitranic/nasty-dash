@@ -12,11 +12,11 @@
 
 <div class="container">
 	<div class="row">
-		<div class="col-4"><h1>N.A.S.T.Y. Dash</h1></div>
-		<div class="col-8">
+		<header id="header-wrapper" class="col-12">
+			<h1>N.A.S.T-y Dash</h1>
 			<form action="/" id="aggregate-form">
 				<div class="row">
-					<div class="col-4">
+					<div class="interval">
 						<label for="aggregate-interval">Interval:</label>
 						<select id="aggregate-interval" class="custom-select">
 							<option value="hour">Hourly</option>
@@ -25,11 +25,11 @@
 							<option value="year">Yearly</option>
 						</select>
 					</div>
-					<div class="col-4">
+					<div class="date-picker">
 						<label for="aggregate-date-picker">Period:</label>
 						<input type="text" name="dates" id="aggregate-date-picker">
 					</div>
-					<div class="col-4">
+					<div class="submit">
 						<button type="submit" class="btn btn-outline-primary">Query</button>
 						<div id="ajax-loader" class="spinner-border spinner-border-sm" role="status">
 							<span class="sr-only">Loading...</span>
@@ -37,11 +37,17 @@
 					</div>
 				</div>
 			</form>
-		</div>
+		</header>
 	</div>
 
-	<div class="row"><div class="col-12"><a class="float-right" href="/api/seed" target="_blank">Seed additional data to the DB.</a></div></div>
-
+	<div class="row">
+		<div class="col-12">
+			<div class="alert alert-primary alert-server" role="alert">
+				<button type="button" class="close" data-dismiss="alert">×</button>
+				<strong>Experiencing a lack of data?</strong> That's not right, feel free to <a href="/api/seed" target="_blank">seed additional random data to the DB</a>. (now - 2 years limit)
+			</div>
+		</div>
+	</div>
 
 	<div class="row">
 		<div class="col-4"><div id="total-revenue-widget" class="widget single-datapoint-widget"></div></div>
