@@ -12,7 +12,7 @@
 
 <div class="container">
 	<div class="row">
-		<div class="col-4">N.A.S.T.Y. Dash</div>
+		<div class="col-4"><h1>N.A.S.T.Y. Dash</h1></div>
 		<div class="col-8">
 			<form action="/" id="aggregate-form">
 				<div class="row">
@@ -40,13 +40,16 @@
 		</div>
 	</div>
 
-	<a href="/api/seed" target="_blank">Seed additional data to the DB.</a>
+	<div class="row"><div class="col-12"><a class="float-right" href="/api/seed" target="_blank">Seed additional data to the DB.</a></div></div>
 
 
-	<div id="total-orders-widget"></div>
-	<div id="total-revenue-widget"></div>
-	<div id="total-customers-widget"></div>
-	<div id="total-timeframe-widget"></div>
+	<div class="row">
+		<div class="col-4"><div id="total-revenue-widget" class="widget single-datapoint-widget"></div></div>
+		<div class="col-4"><div id="total-customers-widget" class="widget single-datapoint-widget"></div></div>
+		<div class="col-4"><div id="total-orders-widget" class="widget single-datapoint-widget"></div></div>
+	</div>
+
+	<div class="row"><div class="col-12"><div id="total-timeframe-widget" class="widget timeframe-widget"></div></div></div>
 
 	<div id="error-popup" class="row position-fixed fixed-bottom">
 		<div class="col-md-6 offset-md-3">

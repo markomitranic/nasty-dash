@@ -1,0 +1,14 @@
+.single-datapoint-widget {
+
+	p {
+	  font-size: 14px;
+	  line-height: 18px;
+	  color: lighten(black, 30%);
+
+	  &.datapoint {
+		font-size: 28px;
+		line-height: 32px;
+		color: black;
+	  }
+	}
+}
