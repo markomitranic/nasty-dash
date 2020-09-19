@@ -12,11 +12,11 @@ class IntervalPicker {
 	}
 
 	sanitizeValue(value) {
-		if (this.allowedValues.indexOf(value)) {
+		if (this.allowedValues.indexOf(value) >= 0) {
 			return value;
 		}
 
-		throw new Error('test');
+		throw new Error('Provided interval value is not allowed ' + value);
 	}
 
 }
