@@ -49,26 +49,15 @@ class MemorySortResolver implements TotalResolver
 				$requestParamsDTO->getDateFrom(), $requestParamsDTO->getDateTo()
 			);
 
-		/** @var AggregatePeriod $aggregatePeriods */
-		$aggregatePeriods = [];
-		/** @var DateTimeInterface $date */
-		foreach ($queryDatePeriod as $date) {
-			$dateEnd = $date->add($queryDatePeriod->getDateInterval());
-			$aggregatePeriods[] = new AggregatePeriod($date, $dateEnd);
-		}
+		$aggregateRegistry = new AggregatePeriodRegistry($queryDatePeriod);
 
-		$orderSumsCollection = $this->getResults($queryDatePeriod->getStartDate(), $queryDatePeriod->getEndDate());
+		$orderSumsCollection = $this->fetchFromDb($queryDatePeriod->getStartDate(), $queryDatePeriod->getEndDate());
 		foreach ($orderSumsCollection as $orderSum) {
-			foreach ($aggregatePeriods as $aggregatePeriod) {
-				if ($orderSum->getPurchaseDate() >= $aggregatePeriod->getDateStartPrimitive()
-					&& $orderSum->getPurchaseDate() < $aggregatePeriod->getDateEndPrimitive()) {
-					$aggregatePeriod->addOrderSum($orderSum);
-				}
-			}
+			$aggregateRegistry->addRecord($orderSum);
 		}
 
 		$results = [];
-		foreach ($aggregatePeriods as $aggregatePeriod) {
+		foreach ($aggregateRegistry->getPeriods() as $aggregatePeriod) {
 			$results[] = new TotalDTO(
 				$aggregatePeriod->getDateStart(),
 				$aggregatePeriod->getDateEnd(),
@@ -86,7 +75,7 @@ class MemorySortResolver implements TotalResolver
 	 * @param DateTimeInterface $endDate
 	 * @return OrderSum[]
 	 */
-	public function getResults(DateTimeInterface $startDate, DateTimeInterface $endDate): array
+	public function fetchFromDb(DateTimeInterface $startDate, DateTimeInterface $endDate): array
 	{
 		$this->sumJoinStatement->execute([
 			'dateFrom' => $startDate->format("Y-m-d H:i:s"),
