@@ -4,11 +4,6 @@ ENV COMPOSER_ALLOW_SUPERUSER=1
 COPY config/php.ini /usr/local/etc/php/conf.d/z-custom.ini
 COPY config/default.conf /etc/nginx/conf.d/default.conf
 COPY ./entrypoint.sh /app/entrypoint.sh
-
-FROM base AS prod
-COPY ./src /app/src
-
-FROM base AS dev
 ARG BLACKFIRE_AGENT_IP=blackfire_agent
 RUN version=$(php -r "echo PHP_MAJOR_VERSION.PHP_MINOR_VERSION;") \
     && curl -A "Docker" -o /tmp/blackfire-probe.tar.gz -D - -L -s https://blackfire.io/api/v1/releases/probe/php/linux/amd64/$version \
@@ -17,6 +12,11 @@ RUN version=$(php -r "echo PHP_MAJOR_VERSION.PHP_MINOR_VERSION;") \
     && mv /tmp/blackfire/blackfire-*.so $(php -r "echo ini_get ('extension_dir');")/blackfire.so \
     && printf "extension=blackfire.so\nblackfire.agent_socket=tcp://$BLACKFIRE_AGENT_IP:8707\n" > $PHP_INI_DIR/conf.d/blackfire.ini \
     && rm -rf /tmp/blackfire /tmp/blackfire-probe.tar.gz
+
+FROM base AS prod
+COPY ./src /app/src
+
+FROM base AS dev
 # Install XDebug (Optional)
 ARG XDEBUG_ACTIVE=0
 ARG XDEBUG_HOST_IP=host.docker.internal
