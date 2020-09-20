@@ -70,7 +70,7 @@ final class ServiceDefinitions
 			),
 			new Service(
 				\NastyDash\Service\Stats\TotalResolver\TotalResolver::class,
-				\NastyDash\Service\Stats\TotalResolver\MemorySortResolver::class
+				\NastyDash\Service\Stats\TotalResolver\MemorySortResolver\MemorySortResolver::class
 			)
 		];
 	}
