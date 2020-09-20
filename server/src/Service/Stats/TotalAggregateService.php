@@ -3,17 +3,17 @@ declare(strict_types=1);
 
 namespace NastyDash\Service\Stats;
 
-use NastyDash\Service\Stats\TotalResolver\PrimitiveResolver;
+use NastyDash\Service\Stats\TotalResolver\TotalResolver;
 
 class TotalAggregateService
 {
 
-	private PrimitiveResolver $primitiveResolver;
+	private TotalResolver $resolver;
 
 	public function __construct(
-		PrimitiveResolver $primitiveResolver
+		TotalResolver $resolver
 	) {
-		$this->primitiveResolver = $primitiveResolver;
+		$this->resolver = $resolver;
 	}
 
 	/**
@@ -22,7 +22,7 @@ class TotalAggregateService
 	 */
 	public function getAggregate(TotalListRequestParamsDTO $requestParamsDTO): array
 	{
-		return $this->primitiveResolver->resolve($requestParamsDTO);
+		return $this->resolver->resolve($requestParamsDTO);
 	}
 
 }

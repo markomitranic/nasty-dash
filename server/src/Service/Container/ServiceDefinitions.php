@@ -67,6 +67,10 @@ final class ServiceDefinitions
 			new Service(
 				\NastyDash\Service\Item\Saver::class,
 				\NastyDash\Service\Item\Saver\Mysql::class
+			),
+			new Service(
+				\NastyDash\Service\Stats\TotalResolver\TotalResolver::class,
+				\NastyDash\Service\Stats\TotalResolver\MemorySortResolver::class
 			)
 		];
 	}
