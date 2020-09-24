@@ -3,15 +3,13 @@ declare(strict_types=1);
 
 namespace NastyDash\Service\Stats\TotalResolver;
 
-use DateTime;
+use DatePeriod;
 use DateTimeInterface;
 use NastyDash\Service\Customer\Reader as CustomerReader;
 use NastyDash\Service\Item\Reader as ItemReader;
 use NastyDash\Service\Order\Order;
 use NastyDash\Service\Order\Reader as OrderReader;
-use NastyDash\Service\Stats\DateRange\AggregateFactory;
 use NastyDash\Service\Stats\TotalDTO;
-use NastyDash\Service\Stats\TotalListRequestParamsDTO;
 
 class PrimitiveResolver implements TotalResolver
 {
@@ -19,30 +17,21 @@ class PrimitiveResolver implements TotalResolver
 	private OrderReader $orderReader;
 	private ItemReader $itemReader;
 	private CustomerReader $customerReader;
-	private AggregateFactory $aggregateFactory;
 
 	public function __construct(
 		OrderReader $orderReader,
 		ItemReader $itemReader,
-		CustomerReader $customerReader,
-		AggregateFactory $aggregateFactory
+		CustomerReader $customerReader
 	) {
 		$this->orderReader = $orderReader;
 		$this->itemReader = $itemReader;
 		$this->customerReader = $customerReader;
-		$this->aggregateFactory = $aggregateFactory;
 	}
 
 
-	public function resolve(TotalListRequestParamsDTO $requestParamsDTO): array
+	public function resolve(DatePeriod $aggregatePeriod): array
 	{
 		$results = [];
-
-		$aggregatePeriod = $this->aggregateFactory
-			->create($requestParamsDTO->getAggregate())
-			->resolveAggregatePoints(
-				$requestParamsDTO->getDateFrom(), $requestParamsDTO->getDateTo()
-			);
 
 		/** @var DateTimeInterface $date */
 		foreach ($aggregatePeriod as $date) {
@@ -54,7 +43,6 @@ class PrimitiveResolver implements TotalResolver
 
 			$results[] = new TotalDTO($date, $periodEnd, count($orders), $revenue, $customers);
 		}
-
 
 		return $results;
 	}

@@ -3,9 +3,9 @@ declare(strict_types=1);
 
 namespace NastyDash\Service\Stats\TotalResolver\MemorySortResolver;
 
+use DatePeriod;
 use DateTimeInterface;
 use NastyDash\Service\Database\PDO;
-use NastyDash\Service\Stats\DateRange\AggregateFactory;
 use NastyDash\Service\Stats\TotalDTO;
 use NastyDash\Service\Stats\TotalListRequestParamsDTO;
 use NastyDash\Service\Stats\TotalResolver\TotalResolver;
@@ -24,15 +24,10 @@ class MemorySortResolver implements TotalResolver
 		WHERE `purchase_date` > :dateFrom AND `purchase_date` < :dateTo;';
 
 	private PDO $pdo;
-	private AggregateFactory $aggregateFactory;
 	private PDOStatement $sumJoinStatement;
 
-	public function __construct(
-		PDO $pdo,
-		AggregateFactory $aggregateFactory
-	) {
+	public function __construct(PDO $pdo) {
 		$this->pdo = $pdo;
-		$this->aggregateFactory = $aggregateFactory;
 		$this->sumJoinStatement = $this->pdo->prepare(self::SUM_JOIN_STATEMENT);
 		$this->sumJoinStatement->setFetchMode(PDO::FETCH_CLASS, OrderSum::class);
 	}
@@ -41,14 +36,8 @@ class MemorySortResolver implements TotalResolver
 	 * @param TotalListRequestParamsDTO $requestParamsDTO
 	 * @return TotalDTO[]
 	 */
-	public function resolve(TotalListRequestParamsDTO $requestParamsDTO): array
+	public function resolve(DatePeriod $queryDatePeriod): array
 	{
-		$queryDatePeriod = $this->aggregateFactory
-			->create($requestParamsDTO->getAggregate())
-			->resolveAggregatePoints(
-				$requestParamsDTO->getDateFrom(), $requestParamsDTO->getDateTo()
-			);
-
 		/** @var AggregatePeriod $aggregatePeriods */
 		$aggregatePeriods = [];
 		/** @var DateTimeInterface $date */

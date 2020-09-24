@@ -3,16 +3,16 @@ declare(strict_types=1);
 
 namespace NastyDash\Service\Stats\TotalResolver;
 
+use DatePeriod;
 use NastyDash\Service\Stats\TotalDTO;
-use NastyDash\Service\Stats\TotalListRequestParamsDTO;
 
 interface TotalResolver
 {
 
 	/**
-	 * @param TotalListRequestParamsDTO $requestParamsDTO
+	 * @param DatePeriod $period
 	 * @return TotalDTO[]
 	 */
-	public function resolve(TotalListRequestParamsDTO $requestParamsDTO): array;
+	public function resolve(DatePeriod $period): array;
 
 }
